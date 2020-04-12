@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Help_package</string>
+    <string name="button">Button</string>
+    <string name="android_app_store">Android App Store</string>
+    <string name="app_name_after">Register App</string>
+    <string name="text_bottom">Войдите в свою учетную запись</string>
+    <string name="btnSignIn">Войти</string>
+    <string name="btnRegister">Зарегистрироваться</string>
+
+
+
+
+
+
+
+
+
+
+
+</resources>
