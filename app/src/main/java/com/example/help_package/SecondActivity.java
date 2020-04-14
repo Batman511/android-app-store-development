@@ -16,7 +16,8 @@ package com.example.help_package;
         import java.util.Vector;
 
 public class SecondActivity extends ListActivity {
-
+    //ArrayList<String> names = new ArrayList();
+    //ArrayAdapter<String> adapter;
 String values[];
 
     public void onCreate(Bundle icicle) {
@@ -43,6 +44,7 @@ String values[];
            /// String[] razbiv = lists.split("$$$");
             ///for (int i=0;i <= razbiv.size();i++) lists.add(i, razbiv[i]);
             for (int i=0;i < 10;i++)  lists.add(i, "10."+i);
+            //names.add("name1");
             //разбиение на версии выше
 
             values = new String[lists.size()];

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,9 +26,18 @@ public class FirstActivity extends AppCompatActivity {
                 showRegisterWindow();
             }
         }); */
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDialogFragment dialog = new CustomDialogFragment();
+                dialog.show(getSupportFragmentManager(), "custom");
+            }});
 
     }
+//кнопка регистрации
 
+
+//кнопка входа
     public void addListenerOnButton () {
         act_change = (Button)findViewById(R.id.btnSignIn);
         act_change.setOnClickListener(

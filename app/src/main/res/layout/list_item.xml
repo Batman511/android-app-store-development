@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 tools:text="Application Name"/>
 
@@ -34,6 +35,7 @@
                 android:id="@+id/app_package"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16dp"
                 android:gravity="center_vertical"
                 tools:text="app.package.name"/>
 
