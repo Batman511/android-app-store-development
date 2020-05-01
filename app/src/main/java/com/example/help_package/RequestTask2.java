@@ -63,11 +63,18 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
             fos.close();
             is.close();
 
-            Intent intent = new Intent(Intent.ACTION_VIEW);
+              //   File newFile = new File(new File(Environment.getExternalStorageDirectory(), "apps"), getImageNameByUrl(appUrl));
+              //   Uri apkUri = getUriForFile(context, BuildConfig.APPLICATION_ID+".provider", newFile);
+                 Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                 intent.setData(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")));
+                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                 context.startActivity(intent);
+
+           /* Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")), "application/vnd.android.package-archive");
             //Android/data/com.company.android.games/temp/temp.apk
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // without this flag android returned a intent error!
-            context.startActivity(intent);
+            context.startActivity(intent); */
         } catch (IOException e) {
                  e.printStackTrace();
              }
