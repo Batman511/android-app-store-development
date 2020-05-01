@@ -20,19 +20,19 @@ import java.net.URL;
 } */
 
 class RequestTask2 extends AsyncTask<String, Void, Void> {
-    private ProgressDialog progressDialog;
+   // private ProgressDialog progressDialog;
     int status = 0;
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
     public void setContext(Context context, ProgressDialog progress){
         this.context = context;
-        this.progressDialog = progress;
+       // this.progressDialog = progress;
     }
 
-    public void onPreExecute() {
-        progressDialog.show();
-    }
+   // public void onPreExecute() {
+       // progressDialog.show();
+   // }
 
     @Override
     protected Void doInBackground(String... arg0) {

@@ -43,7 +43,7 @@ public class MainActivity extends ListActivity {
         ApplicationInfo app = applist.get(position);
 
                 Intent intent = new Intent(MainActivity.this,SecondActivity.class);
-
+                SecondActivity.app = app;
                 startActivity(intent);
 
 

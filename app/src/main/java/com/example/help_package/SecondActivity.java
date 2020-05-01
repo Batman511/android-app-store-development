@@ -19,6 +19,7 @@ public class SecondActivity extends ListActivity {
     //ArrayList<String> names = new ArrayList();
     //ArrayAdapter<String> adapter;
 String values[];
+public static ApplicationInfo app;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -29,18 +30,27 @@ String values[];
         //listView.addHeaderView(header);
         PackageManager pm = getPackageManager();
 //получение имя пакета и его адрес
-        for (ApplicationInfo app : pm.getInstalledApplications(0)) {
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        for(ApplicationInfo app: packages) {
+
+           // for (ApplicationInfo app : pm.getInstalledApplications(0)) {
             Log.d("PackageList", "package: " + app.packageName + ", sourceDir: " + app.sourceDir);
+             //pm.getLaunchIntentForPackage(info.packageName) //app.packageName
         }
+        //Toast.makeText(this, app.packageName,Toast.LENGTH_LONG).show();
+
         Package myPackage = Manifest.class.getPackage();
         String specTitle = myPackage.getSpecificationTitle();
         String vendor = myPackage.getSpecificationVendor();
         String version = myPackage.getSpecificationVersion();
         try {
-            String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/find_version.php?id=" + myPackage.getName()).get(); //http://stackoverflow.com/get_versions.php?id=
-            //пусть вресии отделяются набором символов $$$
+            String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/versions.php?name1=" + app.packageName + ".apk").get(); //http://stackoverflow.com/get_versions.php?id=
+           // Toast.makeText(this, getPackageName(),Toast.LENGTH_LONG).show();;
+
+           // Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
+            //            //пусть вресии отделяются набором символов $$$
             Vector<String> lists = new Vector<String>();
-            String[] Lists = response.split("$$$");
+            String[] Lists = response.split("\\$\\$\\$");
 
             for (int i=0;i < Lists.length;i++) lists.add(Lists[i]);
             //names.add("name1");
@@ -67,11 +77,14 @@ String values[];
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String item = (String) getListAdapter().getItem(position);
 
-        Toast.makeText(this,  " ожидание скачивания "+ values[position], Toast.LENGTH_LONG).show();
+        Toast.makeText(this,  " ожидание скачивания "+ app.packageName + " версия " + values[position], Toast.LENGTH_LONG).show();
         //вызываем асинтаск 2, где скачивает файл
 
         try {
-            Void response2 = new RequestTask2().execute("https://amarketproject.000webhostapp.com/uploads/" + values[position]).get();
+            String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/paths.php?name2=" + app.packageName + ".apk&version=" + values[position]).get();
+            response1 = response1.substring(0,response1.length()-3);
+
+            Void response2 = new RequestTask2().execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
 
         } catch (Exception e) {
             e.printStackTrace();
