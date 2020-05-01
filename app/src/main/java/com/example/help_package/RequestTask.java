@@ -53,7 +53,7 @@ class RequestTask extends AsyncTask<String, String, String>{
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        //Do anything with response..
+
     }
 }
 /* это второй асинтаск где будет качаться само приложение
@@ -67,7 +67,7 @@ class RequestTask extends AsyncTask<String, String, String>{
             c.connect();
 
             File sdcard = Environment.getExternalStorageDirectory();
-            File myDir = new File(sdcard,"Android/data/com.mycompany.android.games/temp");
+            File myDir = new File(sdcard,"Android/data/com.company.android.games/temp");
             myDir.mkdirs();
             File outputFile = new File(myDir, "temp.apk");
             if(outputFile.exists()){

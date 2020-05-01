@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class FirstActivity extends AppCompatActivity {
 
     private Button act_change,btnRegister;
+    AppCompatActivity context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class FirstActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialogFragment dialog = new CustomDialogFragment();
+                CustomDialogFragment dialog = new CustomDialogFragment((EditText)context.findViewById(R.id.your_name));
                 dialog.show(getSupportFragmentManager(), "custom");
             }});
 

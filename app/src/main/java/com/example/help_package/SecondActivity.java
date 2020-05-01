@@ -37,13 +37,12 @@ String values[];
         String vendor = myPackage.getSpecificationVendor();
         String version = myPackage.getSpecificationVersion();
         try {
-            String response = new RequestTask().execute("http://stackoverflow.com/get_versions.php?id=" + myPackage.getName()).get();
+            String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/find_version.php?id=" + myPackage.getName()).get(); //http://stackoverflow.com/get_versions.php?id=
             //пусть вресии отделяются набором символов $$$
             Vector<String> lists = new Vector<String>();
+            String[] Lists = response.split("$$$");
 
-           /// String[] razbiv = lists.split("$$$");
-            ///for (int i=0;i <= razbiv.size();i++) lists.add(i, razbiv[i]);
-            for (int i=0;i < 10;i++)  lists.add(i, "10."+i);
+            for (int i=0;i < Lists.length;i++) lists.add(Lists[i]);
             //names.add("name1");
             //разбиение на версии выше
 
@@ -70,12 +69,12 @@ String values[];
 
         Toast.makeText(this,  " ожидание скачивания "+ values[position], Toast.LENGTH_LONG).show();
         //вызываем асинтаск 2, где скачивает файл
-        /*
+
         try {
-            String response2 = new RequestTask2().execute("http://stackoverflow.com").get();
+            Void response2 = new RequestTask2().execute("https://amarketproject.000webhostapp.com/uploads/" + values[position]).get();
 
         } catch (Exception e) {
             e.printStackTrace();
-        } */
+        }
     }
 }

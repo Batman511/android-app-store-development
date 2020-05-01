@@ -40,7 +40,7 @@ public class AppAdapter extends ArrayAdapter<ApplicationInfo>{
         return position;
     }
 
-    @Override //строим эдемент списка
+    @Override //строим элемент списка
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
 

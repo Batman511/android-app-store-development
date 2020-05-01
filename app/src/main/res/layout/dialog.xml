@@ -8,6 +8,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/darker_gray"
-                android:text="Hello User"
+                android:text="Введите ваше имя: "
                 android:textSize="30sp"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/your_name"/>
 </LinearLayout>
