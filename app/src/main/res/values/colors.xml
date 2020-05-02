@@ -3,7 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="background">#E2FBE3</color>
+    <color name="background">#483D8B</color>
     <color name="text_bottom">#c9c9c9</color>
     <color name="ripple_effect">#4A1414</color>
     <color name="btn_sign_in">#ed7171</color>

@@ -5,12 +5,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <TextView
-                android:text="Ваши приложения"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:textSize="30sp"/>
+
         <ListView
                 android:id="@android:id/list"
                 android:layout_width="match_parent"

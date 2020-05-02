@@ -23,11 +23,8 @@ public static ApplicationInfo app;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        //получить список версий
+        setContentView(R.layout.activity_second);
 
-      //  View header = getLayoutInflater().createView("Версии приложения");
-        //ListView listView = getListView();
-        //listView.addHeaderView(header);
         PackageManager pm = getPackageManager();
 //получение имя пакета и его адрес
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -44,8 +41,8 @@ public static ApplicationInfo app;
         String vendor = myPackage.getSpecificationVendor();
         String version = myPackage.getSpecificationVersion();
         try {
-            String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/versions.php?name1=" + app.packageName + ".apk").get(); //http://stackoverflow.com/get_versions.php?id=
-           // Toast.makeText(this, getPackageName(),Toast.LENGTH_LONG).show();;
+            String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/versions.php?name1=" + app.packageName ).get(); //http://stackoverflow.com/get_versions.php?id=
+            //Toast.makeText(this, app.packageName,Toast.LENGTH_LONG).show();;
 
            // Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
             //            //пусть вресии отделяются набором символов $$$
@@ -62,7 +59,7 @@ public static ApplicationInfo app;
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     R.layout.list2_item,R.id.app_package, values);
             setListAdapter(adapter);
-
+            if (values[0]=="") values[0]="not found of versions :(";
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -77,14 +74,14 @@ public static ApplicationInfo app;
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String item = (String) getListAdapter().getItem(position);
 
-        Toast.makeText(this,  " ожидание скачивания "+ app.packageName + " версия " + values[position], Toast.LENGTH_LONG).show();
+        if (values[0]!="not found of versions :(") Toast.makeText(this,  " ожидание скачивания "+ app.packageName + " версия " + values[position], Toast.LENGTH_LONG).show();
         //вызываем асинтаск 2, где скачивает файл
 
         try {
             String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/paths.php?name2=" + app.packageName + ".apk&version=" + values[position]).get();
             response1 = response1.substring(0,response1.length()-3);
 
-            Void response2 = new RequestTask2().execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
+          //  Void response2 = new RequestTask2().execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
 
         } catch (Exception e) {
             e.printStackTrace();

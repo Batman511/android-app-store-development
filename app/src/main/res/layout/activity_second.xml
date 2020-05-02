@@ -5,11 +5,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SecondActivity"
-        android:background="@color/background">
+        tools:context=".SecondActivity">
+
     <TextView
-            tools:text="Версии приложения:"
-            android:layout_width="0dp"
+            android:text="Версии приложения:"
+            android:layout_width="wrap_content"
+            android:textColor="@color/background"
             android:layout_height="wrap_content"
             android:id="@+id/Name1"
             android:layout_centerHorizontal="true"
@@ -27,13 +28,33 @@
             app:layout_constraintTop_toBottomOf="@+id/Name1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="1.0">
         <ListView
                 android:id="@android:id/list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="531dp">
 
         </ListView>
+        <Button
+                android:text="Загрузить на сайт"
+                android:background="@drawable/btn_register"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="6dp"
+                android:layout_width="250dp"
+                android:layout_height="44dp" android:id="@+id/button4"/>
+        <Button
+                android:text="Удалить приложение"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/btn_sign_in"
+                android:textColor="@android:color/white"
+                android:layout_width="250dp"
+                android:layout_height="43dp" android:id="@+id/button5"/>
+
+
     </LinearLayout>
 
 

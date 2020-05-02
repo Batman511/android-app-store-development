@@ -6,8 +6,12 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,6 +33,12 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getActionBar().setTitle("Ваши приложения");
+        getActionBar().setIcon(R.drawable.wolf1);
+        getActionBar().setBackgroundDrawable(new
+                ColorDrawable(Color.parseColor("#483D8B"))); // #33B5E5
+
+
         packageManager = getPackageManager(); //получение экземпляра класса
 
         new LoadApplications().execute();
@@ -45,8 +55,13 @@ public class MainActivity extends ListActivity {
                 Intent intent = new Intent(MainActivity.this,SecondActivity.class);
                 SecondActivity.app = app;
                 startActivity(intent);
-
-
+/* было раньше
+<TextView
+        android:text="Ваши приложения"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="30sp"/> */
 
  //       try{
 
@@ -108,5 +123,34 @@ public class MainActivity extends ListActivity {
             progress = ProgressDialog.show(MainActivity.this, null, "Loading apps info...");
             super.onPreExecute();
         }
+    }
+
+    //меню
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+            case R.id.download:
+
+                return true;
+            case R.id.dark_menu:
+                //headerView.setText("темная тема");
+                return true;
+            case R.id.light_menu:
+                //headerView.setText("светлая тема");
+                return true;
+            case R.id.open_website:
+                Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
+                startActivity(intent);
+                //("происходит переход на сайт");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
