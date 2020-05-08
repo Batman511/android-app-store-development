@@ -1,33 +1,42 @@
 package com.example.help_package;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class FirstActivity extends AppCompatActivity {
 
-    private Button act_change,btnRegister;
+    private Button act_change,btnRegister,storage;
     AppCompatActivity context = this;
+    private static final int STORAGE_PERMISSION_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+
         addListenerOnButton();
         btnRegister = findViewById(R.id.btnRegister);
+        storage = findViewById(R.id.Storage);
         /*btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showRegisterWindow();
             }
         }); */
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,8 +44,59 @@ public class FirstActivity extends AppCompatActivity {
                 dialog.show(getSupportFragmentManager(), "custom");
             }});
 
+        storage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                checkPermission(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        STORAGE_PERMISSION_CODE);
+            }
+        });
+
     }
-//кнопка регистрации
+//Проверка разрешений
+public void checkPermission(String permission, int requestCode)
+{
+    if (ContextCompat.checkSelfPermission(FirstActivity.this, permission)
+            == PackageManager.PERMISSION_DENIED) {
+
+
+        ActivityCompat.requestPermissions(FirstActivity.this,
+                new String[] { permission },
+                requestCode);
+    }
+    else {
+        Toast.makeText(FirstActivity.this,
+                "Разрешения уже предоставлены", //Permission already granted
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+}
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super
+                .onRequestPermissionsResult(requestCode,
+                        permissions,
+                        grantResults);
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(FirstActivity.this,
+                        "Разрешения предоставлены", //Storage Permission Granted
+                        Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                Toast.makeText(FirstActivity.this,
+                        "Разрешения запрещены", //Storage Permission Denied
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
 
 
 //кнопка входа
@@ -56,6 +116,8 @@ public class FirstActivity extends AppCompatActivity {
                 }
         );
     }
+
+
     //Всплывающее окно
     /*
     private  void  showRegisterWindow() {
