@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +19,15 @@ public class DisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        getActionBar().setTitle("Ваши приложения");
+        /*getActionBar().setTitle("Ваши приложения");
         getActionBar().setIcon(R.drawable.wolf1);
         getActionBar().setBackgroundDrawable(new
-                ColorDrawable(Color.parseColor("#483D8B")));
+                ColorDrawable(Color.parseColor("#483D8B"))); */
 
-        WebView browser = (WebView) findViewById(R.id.webBrowser);
+
+        browser = (WebView) findViewById(R.id.webBrowser);
+        WebSettings ws = browser.getSettings();
+        ws.setJavaScriptEnabled(true);
         browser.loadUrl("https://amarketproject.000webhostapp.com/uploads/?C=N;O=A");
         browser.setWebViewClient(new WebViewClient());
     }

@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
+import androidx.core.content.FileProvider;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -65,10 +67,29 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
               //   File newFile = new File(new File(Environment.getExternalStorageDirectory(), "apps"), getImageNameByUrl(appUrl));
               //   Uri apkUri = getUriForFile(context, BuildConfig.APPLICATION_ID+".provider", newFile);
-                 Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                 intent.setData(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")));
-                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                 context.startActivity(intent);
+
+                 File toInstall = new  File(sdcard, "Android/data/temp.apk");
+                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                     Uri apkUri = Uri.fromFile(toInstall);
+                     Intent intent = new Intent(Intent.ACTION_VIEW); //ACTION_INSTALL_PACKAGE
+                     intent.setData(apkUri);
+                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                     context.startActivity(intent);
+                 } else {
+                     Uri apkUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", toInstall);
+                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                     intent.setData(apkUri);
+                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                     context.startActivity(intent);
+                 }
+
+                 /*(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                     Intent intent = new Intent(Intent.ACTION_VIEW); //ACTION_INSTALL_PACKAGE
+                     intent.setData(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")));
+                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                     context.startActivity(intent);*/
+
+
 
            /* Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")), "application/vnd.android.package-archive");

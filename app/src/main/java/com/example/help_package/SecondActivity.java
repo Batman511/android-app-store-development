@@ -81,7 +81,7 @@ public static ApplicationInfo app;
             String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/paths.php?name2=" + app.packageName + ".apk&version=" + values[position]).get();
             response1 = response1.substring(0,response1.length()-3);
 
-          //  Void response2 = new RequestTask2().execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
+            Void response2 = new RequestTask2().execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
 
         } catch (Exception e) {
             e.printStackTrace();
