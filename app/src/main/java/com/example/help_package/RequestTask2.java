@@ -27,7 +27,7 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
-    public void setContext(Context context, ProgressDialog progress){
+    public void setContext(Context context){
         this.context = context;
        // this.progressDialog = progress;
     }
@@ -38,6 +38,7 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... arg0) {
+
              try {
             URL url = new URL(arg0[0]);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
@@ -46,7 +47,7 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
             c.connect();
 
             File sdcard = Environment.getExternalStorageDirectory();
-            File myDir = new File(sdcard, "Android/data"); //Android/data/com.company.android.games/temp
+            File myDir = new File(sdcard, "Downloads"); //Android/data/com.company.android.games/temp
             myDir.mkdirs();
             File outputFile = new File(myDir, "temp.apk");
             if (outputFile.exists()) {
@@ -68,16 +69,17 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
               //   File newFile = new File(new File(Environment.getExternalStorageDirectory(), "apps"), getImageNameByUrl(appUrl));
               //   Uri apkUri = getUriForFile(context, BuildConfig.APPLICATION_ID+".provider", newFile);
 
-                 File toInstall = new  File(sdcard, "Android/data/temp.apk");
+                 File toInstall = new  File(sdcard, "Downloads/temp.apk");
                  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                      Uri apkUri = Uri.fromFile(toInstall);
-                     Intent intent = new Intent(Intent.ACTION_VIEW); //ACTION_INSTALL_PACKAGE
+                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE); //ACTION_INSTALL_PACKAGE
                      intent.setData(apkUri);
                      intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                      context.startActivity(intent);
                  } else {
-                     Uri apkUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", toInstall);
-                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                     //Uri apkUri = Uri.fromFile(toInstall);
+                     Uri apkUri = FileProvider.getUriForFile(context, com.example.help_package.BuildConfig.APPLICATION_ID + ".provider", toInstall);
+                     Intent intent = new Intent(Intent.ACTION_VIEW);
                      intent.setData(apkUri);
                      intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                      context.startActivity(intent);

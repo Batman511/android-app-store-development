@@ -42,7 +42,7 @@ public static ApplicationInfo app;
         String version = myPackage.getSpecificationVersion();
         try {
             String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/versions.php?name1=" + app.packageName ).get(); //http://stackoverflow.com/get_versions.php?id=
-            //Toast.makeText(this, app.packageName,Toast.LENGTH_LONG).show();;
+            //Toast.makeText(this, app.packageName,Toast.LENGTH_LONG).show();
 
            // Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
             //            //пусть вресии отделяются набором символов $$$
@@ -78,10 +78,13 @@ public static ApplicationInfo app;
         //вызываем асинтаск 2, где скачивает файл
 
         try {
-            String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/paths.php?name2=" + app.packageName + ".apk&version=" + values[position]).get();
-            response1 = response1.substring(0,response1.length()-3);
+            String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/urls.php?name2=" + app.packageName + "$" + values[position]).get();
+            //response1 = response1.substring(0,response1.length()-4);
+           // Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
+            RequestTask2 req2 = new RequestTask2();
+            req2.setContext(this);
 
-            Void response2 = new RequestTask2().execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
+            Void response2 = req2.execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
 
         } catch (Exception e) {
             e.printStackTrace();

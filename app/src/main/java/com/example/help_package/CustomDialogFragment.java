@@ -17,10 +17,10 @@ import androidx.fragment.app.DialogFragment;
 
 @SuppressLint("ValidFragment")
 public class CustomDialogFragment extends DialogFragment {
- //   EditText your_name;
+
 @SuppressLint("ValidFragment")
 public CustomDialogFragment (EditText context2) {
-  //  your_name = context2;
+
 }
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {

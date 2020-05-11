@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ThirdActivity">
+
+    <TextView
+            android:text="Скачать приложения:"
+            android:layout_width="wrap_content"
+            android:textColor="@color/background"
+            android:layout_height="wrap_content"
+            android:id="@+id/Name1"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="3dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="412dp"
+            android:weightSum="2"
+            android:layout_height="0dp"
+            android:id="@+id/linearLayout2" app:layout_constraintTop_toBottomOf="@+id/Name1"
+            android:layout_marginBottom="598dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0" app:layout_constraintVertical_bias="1.0">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:hint="введите имя файла"
+                android:textSize="20dp"
+                android:ems="10"
+                android:id="@+id/editText" android:layout_weight="2"/>
+        <Button
+                android:text="поиск"
+                android:background="@android:color/holo_blue_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/search" android:layout_weight="1"/>
+    </LinearLayout>
+    <ListView
+            android:layout_width="405dp"
+            android:layout_height="587dp"
+            android:id="@android:id/list"
+            app:layout_constraintTop_toBottomOf="@+id/Name1" android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintVertical_bias="1.0"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -137,7 +137,8 @@ public class MainActivity extends ListActivity {
         int id = item.getItemId();
         switch(id){
             case R.id.download:
-
+                Intent intent2 = new Intent(MainActivity.this, ThirdActivity.class);
+                startActivity(intent2);
                 return true;
             case R.id.dark_menu:
                 //headerView.setText("темная тема");
@@ -148,7 +149,6 @@ public class MainActivity extends ListActivity {
             case R.id.open_website:
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
                 startActivity(intent);
-                //("происходит переход на сайт");
                 return true;
         }
         return super.onOptionsItemSelected(item);
