@@ -94,6 +94,8 @@ public class MainActivity extends ListActivity {
             }
         }
 
+
+
         return appList;
     }
 

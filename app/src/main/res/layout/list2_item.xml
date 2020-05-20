@@ -16,8 +16,9 @@
 
         <TextView
                 android:id="@+id/app_package"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textSize="23dp"
                 android:gravity="center_vertical"
                 tools:text="@+id/app_package"/>

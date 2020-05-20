@@ -4,15 +4,22 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
+import android.widget.Toast;
 import androidx.core.content.FileProvider;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import static android.content.ContentValues.TAG;
+import static com.example.help_package.SecondActivity.app;
 /*public class RequestTask2 extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,9 +45,10 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... arg0) {
-
+    int version1=0,version2=0;
              try {
             URL url = new URL(arg0[0]);
+            String packageName = arg0[1];
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestMethod("GET");
             c.setDoOutput(true);
@@ -55,6 +63,8 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
             }
             FileOutputStream fos = new FileOutputStream(outputFile);
 
+
+
             InputStream is = c.getInputStream();
 
             byte[] buffer = new byte[1024];
@@ -66,8 +76,41 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
             fos.close();
             is.close();
 
+            //получение версии приложения
+
+                 try {
+                     File toInstall = new  File(sdcard, "Downloads/temp.apk");
+                     PackageInfo packageInfo2 = context.getPackageManager().getPackageArchiveInfo(toInstall.getAbsolutePath(), 0);
+                     //String version = packageInfo.versionName;
+                     version2 = packageInfo2.versionCode;
+                    // Toast.makeText(context, version2,Toast.LENGTH_LONG).show();
+                 }catch (Exception e) {
+                     e.printStackTrace();
+                 };
+
+            //проверка версии
+
+                 try {
+                     PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
+                     //String version = packageInfo.versionName;
+                     version1 = packageInfo.versionCode;
+                     //Toast.makeText(context, version1,Toast.LENGTH_LONG).show();
+                 }catch (Exception e) {
+                     version1 = -1;
+                     e.printStackTrace();
+                 };
+
+                    Log.d("sfsfs",version1+": "+version2);
+                 if (version1 > version2) {
+                     Intent intent2 = new Intent(Intent.ACTION_DELETE,
+                             Uri.fromParts("package", packageName,null));
+                     context.startActivity(intent2);
+
+                 };
               //   File newFile = new File(new File(Environment.getExternalStorageDirectory(), "apps"), getImageNameByUrl(appUrl));
               //   Uri apkUri = getUriForFile(context, BuildConfig.APPLICATION_ID+".provider", newFile);
+
+
 
                  File toInstall = new  File(sdcard, "Downloads/temp.apk");
                  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -103,4 +146,16 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
              }
         return null;
     }
+
+    /*public boolean uninstall(final String packageName, final Context context) {
+        Log.d(TAG, "Uninstalling package " + packageName);
+        try {
+            context.getPackageManager().deletePackage(packageName, deleteObserver, PackageManager.DELETE_ALL_USERS);
+            return true; }
+        catch (Exception e) { e.printStackTrace();
+        return false; } } */
+
+//вощмоный ввриант удаления
+
+
 }

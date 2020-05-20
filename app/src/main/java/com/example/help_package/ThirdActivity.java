@@ -68,30 +68,15 @@ public class ThirdActivity extends ListActivity {
             values[position] = values[position].replace(' ', '$');
             String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/urls.php?name2=" + values[position]).get();
              //Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
-            /*!!!!!!!RequestTask2 req2 = new RequestTask2();
+            RequestTask2 req2 = new RequestTask2();
             req2.setContext(this);
 
-            Void response2 = req2.execute(response1).get(); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
-            !!!!!!!!*/
+            req2.execute(response1); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-          /* // EditText your_choice =(EditText)findViewById(R.id.search);
-            String response3 = new RequestTask().execute("https://amarketproject.000webhostapp.com/search.php?key=" + "calculator").get(); //your_choice.getText()
-            Vector<String> lists2 = new Vector<String>();
 
-            String[] Lists2 = response3.split("\\$\\$\\$");
-            for (int i=0;i < Lists2.length;i++) lists2.add(Lists2[i]);
-
-            values = new String[lists2.size()];
-            for (int i = 0; i < lists2.size(); i++)
-                values[i] = lists2.get(i);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    R.layout.list2_item, R.id.app_package, values);
-            setListAdapter(adapter);
-        }  catch (Exception e) {
-            e.printStackTrace();
-        } */
 
 }
