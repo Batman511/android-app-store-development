@@ -1,4 +1,4 @@
-package com.example.help_package;
+package com.example.AppStore;
 import java.util.List;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

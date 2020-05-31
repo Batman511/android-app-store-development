@@ -1,13 +1,9 @@
-package com.example.help_package;
+package com.example.AppStore;
 
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.Vector;

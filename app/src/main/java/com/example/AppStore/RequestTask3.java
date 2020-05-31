@@ -1,25 +1,19 @@
-package com.example.help_package;
+package com.example.AppStore;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.Toast;
 import androidx.core.content.FileProvider;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static android.content.ContentValues.TAG;
-import static com.example.help_package.SecondActivity.app;
+import static com.example.AppStore.SecondActivity.app;
 
 class RequestTask3 extends AsyncTask<String, Void, Void> {
     // private ProgressDialog progressDialog;
@@ -77,7 +71,7 @@ class RequestTask3 extends AsyncTask<String, Void, Void> {
                 context.startActivity(intent);
             } else {
                 //Uri apkUri = Uri.fromFile(toInstall);
-                Uri apkUri = FileProvider.getUriForFile(context, com.example.help_package.BuildConfig.APPLICATION_ID + ".provider", toInstall);
+                Uri apkUri = FileProvider.getUriForFile(context, com.example.AppStore.BuildConfig.APPLICATION_ID + ".provider", toInstall);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(apkUri);
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

@@ -1,4 +1,4 @@
-package com.example.help_package;
+package com.example.AppStore;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;

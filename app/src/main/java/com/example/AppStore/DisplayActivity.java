@@ -1,4 +1,4 @@
-package com.example.help_package;
+package com.example.AppStore;
 
 import android.content.Intent;
 import android.graphics.Color;

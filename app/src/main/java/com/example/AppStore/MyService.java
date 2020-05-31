@@ -1,10 +1,9 @@
-package com.example.help_package;
+package com.example.AppStore;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.util.TimeFormatException;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,4 +1,4 @@
-package com.example.help_package;
+package com.example.AppStore;
 
 import android.os.AsyncTask;
 
@@ -6,9 +6,6 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 class RequestTask extends AsyncTask<String, String, String>{
 

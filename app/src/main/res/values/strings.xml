@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Help_package</string>
+    <string name="app_name">AppStore</string>
     <string name="button">Button</string>
     <string name="android_app_store">Android App Store</string>
     <string name="app_name_after">Register App</string>
