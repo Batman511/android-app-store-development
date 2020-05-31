@@ -94,6 +94,16 @@ public class MainActivity extends ListActivity {
             }
         }
 
+    //сортировка
+      /*  for (int i = appList.size() - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (appList.get(j) > appList.get(j + 1)) {
+                    int tmp = appList[j];
+                    appList[j] = appList[j + 1];
+                    appList[j + 1] = tmp;
+                }
+            }
+        } */
 
 
         return appList;
@@ -142,11 +152,9 @@ public class MainActivity extends ListActivity {
                 Intent intent2 = new Intent(MainActivity.this, ThirdActivity.class);
                 startActivity(intent2);
                 return true;
-            case R.id.dark_menu:
-                //headerView.setText("темная тема");
-                return true;
-            case R.id.light_menu:
-                //headerView.setText("светлая тема");
+            case R.id.settings:
+                Intent intent3 = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent3);
                 return true;
             case R.id.open_website:
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class);

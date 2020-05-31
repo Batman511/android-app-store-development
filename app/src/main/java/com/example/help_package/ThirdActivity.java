@@ -54,7 +54,6 @@ public class ThirdActivity extends ListActivity {
                     }
                 }
         );
-        //ListView countriesList = (ListView) findViewById(R.id.list);
 
     }
 
@@ -68,10 +67,10 @@ public class ThirdActivity extends ListActivity {
             values[position] = values[position].replace(' ', '$');
             String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/urls.php?name2=" + values[position]).get();
              //Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
-            RequestTask2 req2 = new RequestTask2();
-            req2.setContext(this);
+            RequestTask3 req3 = new RequestTask3();
+            req3.setContext(this);
 
-            req2.execute(response1); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
+            req3.execute(response1); //"https://amarketproject.000webhostapp.com/uploads/" + values[position]
 
         } catch (Exception e) {
             e.printStackTrace();

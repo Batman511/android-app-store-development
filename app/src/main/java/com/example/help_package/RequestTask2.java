@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.ContentObservable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,19 +19,12 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static android.content.ContentValues.TAG;
-import static com.example.help_package.SecondActivity.app;
-/*public class RequestTask2 extends ListActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
-    }
-} */
-
 class RequestTask2 extends AsyncTask<String, Void, Void> {
    // private ProgressDialog progressDialog;
     int status = 0;
+    int proverka = 1;
+    //private ContentObservable MOBSInt;
+   // MOBSInt.set(0);
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
@@ -101,32 +95,40 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
                  };
 
                     Log.d("sfsfs",version1+": "+version2);
+
+                // MOBSInt (new OnIntegerChangeListener())
+
+
                  if (version1 > version2) {
                      Intent intent2 = new Intent(Intent.ACTION_DELETE,
                              Uri.fromParts("package", packageName,null));
                      context.startActivity(intent2);
 
+                     proverka +=1;
                  };
               //   File newFile = new File(new File(Environment.getExternalStorageDirectory(), "apps"), getImageNameByUrl(appUrl));
               //   Uri apkUri = getUriForFile(context, BuildConfig.APPLICATION_ID+".provider", newFile);
 
 
+                 if (proverka == 1) {
 
-                 File toInstall = new  File(sdcard, "Downloads/temp.apk");
-                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                     Uri apkUri = Uri.fromFile(toInstall);
-                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE); //ACTION_INSTALL_PACKAGE
-                     intent.setData(apkUri);
-                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                     context.startActivity(intent);
-                 } else {
-                     //Uri apkUri = Uri.fromFile(toInstall);
-                     Uri apkUri = FileProvider.getUriForFile(context, com.example.help_package.BuildConfig.APPLICATION_ID + ".provider", toInstall);
-                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                     intent.setData(apkUri);
-                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                     context.startActivity(intent);
+                     File toInstall = new File(sdcard, "Downloads/temp.apk");
+                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                         Uri apkUri = Uri.fromFile(toInstall);
+                         Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE); //ACTION_INSTALL_PACKAGE
+                         intent.setData(apkUri);
+                         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                         context.startActivity(intent);
+                     } else {
+                         //Uri apkUri = Uri.fromFile(toInstall);
+                         Uri apkUri = FileProvider.getUriForFile(context, com.example.help_package.BuildConfig.APPLICATION_ID + ".provider", toInstall);
+                         Intent intent = new Intent(Intent.ACTION_VIEW);
+                         intent.setData(apkUri);
+                         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                         context.startActivity(intent);
+                     }
                  }
+                 proverka = 1;
 
                  /*(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                      Intent intent = new Intent(Intent.ACTION_VIEW); //ACTION_INSTALL_PACKAGE
@@ -146,16 +148,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
              }
         return null;
     }
-
-    /*public boolean uninstall(final String packageName, final Context context) {
-        Log.d(TAG, "Uninstalling package " + packageName);
-        try {
-            context.getPackageManager().deletePackage(packageName, deleteObserver, PackageManager.DELETE_ALL_USERS);
-            return true; }
-        catch (Exception e) { e.printStackTrace();
-        return false; } } */
-
-//вощмоный ввриант удаления
 
 
 }

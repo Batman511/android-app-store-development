@@ -7,6 +7,7 @@ package com.example.help_package;
         import android.content.pm.ApplicationInfo;
         import android.content.pm.PackageInfo;
         import android.content.pm.PackageManager;
+        import android.net.Uri;
         import android.os.Bundle;
         import android.os.Environment;
         import android.util.Log;
@@ -22,16 +23,20 @@ package com.example.help_package;
         import java.util.Vector;
 
 public class SecondActivity extends ListActivity {
-    //ArrayList<String> names = new ArrayList();
-    //ArrayAdapter<String> adapter;
-String values[];
-    private Button button5;
+
+    private Button delete_but;
+    String values[];
+    String version1;
+
 public static ApplicationInfo app;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_second);
-        //DeleteOnButton();
+
+        delete_but = findViewById(R.id.button4);
+        DeleteOnButton();
+
         PackageManager pm = getPackageManager();
 //получение имя пакета и его адрес
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -40,7 +45,7 @@ public static ApplicationInfo app;
         }
 
         //вывод версии текущего приложения
-        /*PackageInfo packageInfo = getPackageManager().getPackageInfo(packageName, 0);
+        /*PackageInfo packageInfo = getPackageManager().getPackageInfo(app.packageName, 0);
         String version3 = packageInfo.versionName;
         //version3 = packageInfo.versionCode;
         Toast.makeText(this, version3,Toast.LENGTH_LONG).show();*/
@@ -50,6 +55,16 @@ public static ApplicationInfo app;
         String specTitle = myPackage.getSpecificationTitle();
         String vendor = myPackage.getSpecificationVendor();
        // String version = myPackage.getSpecificationVersion();
+
+
+        //вывод версии приложения
+        /*
+        PackageInfo packageInfo = this.getPackageManager().getPackageInfo(app.packageName, 0);
+        //String version = packageInfo.versionName;
+        version1 = packageInfo.versionName;
+        //Toast.makeText(context, version1,Toast.LENGTH_LONG).show();
+        */
+
         try {
             String response = new RequestTask().execute("https://amarketproject.000webhostapp.com/versions.php?name1=" + app.packageName ).get(); //http://stackoverflow.com/get_versions.php?id=
            // Toast.makeText(this, app.,Toast.LENGTH_LONG).show();
@@ -89,8 +104,7 @@ public static ApplicationInfo app;
 
         try {
             String response1 = new RequestTask().execute("https://amarketproject.000webhostapp.com/urls.php?name2=" + app.packageName + "$" + values[position]).get();
-            //response1 = response1.substring(0,response1.length()-4);
-           // Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, response1,Toast.LENGTH_LONG).show();
             RequestTask2 req2 = new RequestTask2();
             req2.setContext(this);
 
@@ -101,25 +115,18 @@ public static ApplicationInfo app;
         }
     }
 
-    //удаление приложения
-   /* public void DeleteOnButton (Context context, Intent intent) {
-    button5 = (Button) findViewById(R.id.button5);
-        button5.setOnClickListener(
+    public void DeleteOnButton () {
+        delete_but = (Button)findViewById(R.id.button4);
+        delete_but.setOnClickListener(
                 new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent2 = new Intent(Intent.ACTION_DELETE,
+                                Uri.fromParts("package", app.packageName,null));
+                        startActivity(intent2);
+                    }
+                }
+        );
+    }
 
-        try
-        {
-            String packageName = intent.getData().toString() + getApplicationName(context, intent.getData().toString(), PackageManager.GET_UNINSTALLED_PACKAGES); //ApplicationInfo
-
-            if(intent.getAction().equals("android.intent.action.PACKAGE_ADDED")){
-                File sdcard = Environment.getExternalStorageDirectory();
-                File file = new File(sdcard,"Downloads/temp.apk");
-                file.delete();
-            }
-        }catch(Exception e){Toast.makeText(context, "onReceive()", Toast.LENGTH_LONG).show();}
-        };
-    };
-    };*/
 }
