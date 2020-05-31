@@ -16,22 +16,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 class RequestTask2 extends AsyncTask<String, Void, Void> {
-   // private ProgressDialog progressDialog;
     int status = 0;
     int proverka = 1;
-    //private ContentObservable MOBSInt;
-   // MOBSInt.set(0);
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
     public void setContext(Context context){
         this.context = context;
-       // this.progressDialog = progress;
     }
-
-   // public void onPreExecute() {
-       // progressDialog.show();
-   // }
 
     @Override
     protected Void doInBackground(String... arg0) {
@@ -54,7 +46,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
             FileOutputStream fos = new FileOutputStream(outputFile);
 
 
-
             InputStream is = c.getInputStream();
 
             byte[] buffer = new byte[1024];
@@ -71,7 +62,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
                  try {
                      File toInstall = new  File(sdcard, "Downloads/temp.apk");
                      PackageInfo packageInfo2 = context.getPackageManager().getPackageArchiveInfo(toInstall.getAbsolutePath(), 0);
-                     //String version = packageInfo.versionName;
                      version2 = packageInfo2.versionCode;
                     // Toast.makeText(context, version2,Toast.LENGTH_LONG).show();
                  }catch (Exception e) {
@@ -82,7 +72,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
                  try {
                      PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
-                     //String version = packageInfo.versionName;
                      version1 = packageInfo.versionCode;
                      //Toast.makeText(context, version1,Toast.LENGTH_LONG).show();
                  }catch (Exception e) {
@@ -92,7 +81,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
                     Log.d("sfsfs",version1+": "+version2);
 
-                // MOBSInt (new OnIntegerChangeListener())
 
 
                  if (version1 > version2) {
@@ -102,9 +90,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
 
                      proverka +=1;
                  };
-              //   File newFile = new File(new File(Environment.getExternalStorageDirectory(), "apps"), getImageNameByUrl(appUrl));
-              //   Uri apkUri = getUriForFile(context, BuildConfig.APPLICATION_ID+".provider", newFile);
-
 
                  if (proverka == 1) {
 
@@ -126,19 +111,6 @@ class RequestTask2 extends AsyncTask<String, Void, Void> {
                  }
                  proverka = 1;
 
-                 /*(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                     Intent intent = new Intent(Intent.ACTION_VIEW); //ACTION_INSTALL_PACKAGE
-                     intent.setData(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")));
-                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                     context.startActivity(intent);*/
-
-
-
-           /* Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(new File(sdcard, "Android/data/temp.apk")), "application/vnd.android.package-archive");
-            //Android/data/com.company.android.games/temp/temp.apk
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // without this flag android returned a intent error!
-            context.startActivity(intent); */
         } catch (IOException e) {
                  e.printStackTrace();
              }

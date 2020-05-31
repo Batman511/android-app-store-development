@@ -13,22 +13,15 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.example.AppStore.SecondActivity.app;
-
 class RequestTask3 extends AsyncTask<String, Void, Void> {
-    // private ProgressDialog progressDialog;
     int status = 0;
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
     public void setContext(Context context){
         this.context = context;
-        // this.progressDialog = progress;
     }
 
-    // public void onPreExecute() {
-    // progressDialog.show();
-    // }
 
     @Override
     protected Void doInBackground(String... arg0) {
@@ -47,7 +40,6 @@ class RequestTask3 extends AsyncTask<String, Void, Void> {
                 outputFile.delete();
             }
             FileOutputStream fos = new FileOutputStream(outputFile);
-
 
 
             InputStream is = c.getInputStream();

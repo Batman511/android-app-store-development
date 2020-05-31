@@ -2,7 +2,6 @@ package com.example.AppStore;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -13,9 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +35,8 @@ public class MainActivity extends ListActivity {
         getActionBar().setBackgroundDrawable(new
                 ColorDrawable(Color.parseColor("#483D8B"))); // #33B5E5
 
-
         packageManager = getPackageManager(); //получение экземпляра класса
-
         new LoadApplications().execute();
-
     }
 
 
@@ -55,28 +49,7 @@ public class MainActivity extends ListActivity {
                 Intent intent = new Intent(MainActivity.this,SecondActivity.class);
                 SecondActivity.app = app;
                 startActivity(intent);
-/* было раньше
-<TextView
-        android:text="Ваши приложения"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textSize="30sp"/> */
 
- //       try{
-
-//            Intent intent = packageManager.getLaunchIntentForPackage(app.packageName);
-//
-//            if(intent != null) {
-//                startActivity(intent);
-//            }
-//        } catch(ActivityNotFoundException e) {
-//            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//        } catch(Exception e) {
-//            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//        }
-//
-//
     }
 
 
@@ -95,16 +68,21 @@ public class MainActivity extends ListActivity {
         }
 
     //сортировка
-      /*  for (int i = appList.size() - 1; i > 0; i--) {
+        for (int i = appList.size() - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
-                if (appList.get(j) > appList.get(j + 1)) {
-                    int tmp = appList[j];
-                    appList[j] = appList[j + 1];
-                    appList[j + 1] = tmp;
+                //сортировка по названию приложения (очень долго)
+                //String name1 = (String)((ApplicationInfo)appList.get(j)).loadLabel(packageManager);
+                //String name2 = (String)((ApplicationInfo)appList.get(j+1)).loadLabel(packageManager);
+
+                String name1 = (String)((ApplicationInfo)appList.get(j)).packageName;
+                String name2 = (String)((ApplicationInfo)appList.get(j+1)).packageName;
+                if (name1.compareTo(name2) > 0){
+                    ApplicationInfo tmp = (ApplicationInfo)appList.get(j);
+                    appList.set(j,appList.get(j+1));
+                    appList.set(j+1,tmp);
                 }
             }
-        } */
-
+        }
 
         return appList;
     }

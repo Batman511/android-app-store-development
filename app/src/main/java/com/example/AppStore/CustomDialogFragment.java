@@ -21,10 +21,6 @@ public CustomDialogFragment (EditText context2) {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-       // LayoutInflater factory = LayoutInflater.from(this);
-        //final View textEntryView = factory.inflate(R.layout.dialog, null);
-        //CustomDialogFragment dlg = new CustomDialogFragment(this);
-        //EditText your_name = findViewById(R.id.your_name);
 
         return builder
                 .setTitle("Окно регистрации")
